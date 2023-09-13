@@ -19,7 +19,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${inter.className} bg-gray-100 dark:bg-gray-900 text-black dark:text-white ${switchThemeDuration}`}
+        className={`${inter.className} bg-gray-100 dark:bg-gray-900 text-black dark:text-white pb-4 ${switchThemeDuration}`}
       >
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
           <Header />

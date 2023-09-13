@@ -63,7 +63,7 @@ export default function Contact() {
                     <button type="submit" className="mt-6 px-4 py-2 bg-blue-500 text-white rounded-lg shadow-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">
                         Submit
                     </button>
-                    <div className="flex items-center justify-center gap-4 pb-4">
+                    <div className="flex items-center justify-center gap-4">
                         <Link href="https://www.facebook.com/taroj1205/" target="_blank" rel="noopener noreferrer">
                             <FaFacebook className="text-4xl text-blue-500 hover:text-blue-600" />
                         </Link>

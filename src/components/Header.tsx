@@ -100,7 +100,7 @@ export default function Header() {
     };
 
     return (
-        <header className="sticky flex flex-col md:flex-row items-center justify-between w-full px-4 py-3 bg-white shadow-md dark:bg-gray-800">
+        <header className="sticky top-0 flex flex-col md:flex-row items-center justify-between w-full px-4 py-3 bg-white shadow-md dark:bg-gray-800">
             <div className="flex items-center">
                 <div className='text-lg lg:text-2xl'><FaGraduationCap /></div>
                 <h1 className="ml-2 text-md md:text-lg font-bold text-gray-900 dark:text-white">
