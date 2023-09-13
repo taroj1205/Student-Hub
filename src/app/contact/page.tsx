@@ -14,10 +14,10 @@ export default function Contact() {
     };
 
     return (
-        <main className='flex flex-col items-center justify-center min-h-screen bg-gray-100 dark:bg-gray-900 dark:text-white'>
+        <main className='flex flex-col items-center justify-center min-h-full'>
             <div className="max-w-5xl w-full px-4 sm:px-6 lg:px-8">
                 <div className="flex flex-col items-center justify-center py-12">
-                    <h1 className="mt-6 text-3xl font-extrabold text-gray-900 dark:text-white">
+                    <h1 className="text-3xl font-extrabold text-gray-900 dark:text-white">
                         Contact Me
                     </h1>
                     <p className="mt-2 text-lg text-gray-600 dark:text-gray-400">

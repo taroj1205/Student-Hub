@@ -1,5 +1,4 @@
 'use client'
-import Image from 'next/image';
 import Link from 'next/link';
 import { ThemeSwitcher } from '@/components/ThemeSwitcher';
 import { usePathname } from 'next/navigation';
@@ -20,11 +19,12 @@ export default function Header() {
     ];
 
     useEffect(() => {
+        setActive(false);
         const links = document.querySelectorAll('nav a');
         links.forEach((link) => {
+            console.log(link.getAttribute('href'), pathname);
             if (link.getAttribute('href') === pathname) {
                 if (activeRef.current) {
-                    setActiveLinkStyle('block');
                     const width = link.getBoundingClientRect().width;
                     activeRef.current.style.width = `${width}px`;
                     const linkPosition = link.getBoundingClientRect();
@@ -32,6 +32,7 @@ export default function Header() {
                     console.log(link.classList);
                     link.classList.add('text-gray-900');
                     link.classList.add('dark:text-white');
+                    setActiveLinkStyle('fixed');
                 }
                 setActive(true);
             } else if (!active) {
@@ -42,15 +43,17 @@ export default function Header() {
         });
 
         const handleResize = () => {
+            const links = document.querySelectorAll('nav a');
             links.forEach((link) => {
                 if (link.getAttribute('href') === pathname) {
                     if (activeRef.current) {
-                        const marginLeft = parseInt(getComputedStyle(link).marginLeft);
-                        const marginRight = parseInt(getComputedStyle(link).marginRight);
-                        const width = link.getBoundingClientRect().width + marginLeft + marginRight;
+                        const width = link.getBoundingClientRect().width;
                         activeRef.current.style.width = `${width}px`;
                         const linkPosition = link.getBoundingClientRect();
-                        activeRef.current.style.transform = `translate(${linkPosition.left - marginLeft}px, ${linkPosition.top}px)`;
+                        activeRef.current.style.transform = `translate(${linkPosition.left}px, ${linkPosition.top}px)`;
+                        console.log(link.classList);
+                        link.classList.add('text-gray-900');
+                        link.classList.add('dark:text-white');
                         setActiveLinkStyle('fixed');
                     }
                     setActive(true);
@@ -67,32 +70,70 @@ export default function Header() {
         };
     }, [active, pathname]);
 
+    const handleMouseEnter = (e: React.MouseEvent<HTMLAnchorElement>) => {
+        const target = e.currentTarget;
+        console.log(pathname, target.href, pathname === target.href);
+        if (pathname === `/${target.href.split('/').pop()}`) {
+            if (activeRef.current) {
+                const width = target.getBoundingClientRect().width;
+                activeRef.current.style.width = `${width + 20}px`;
+                const linkPosition = target.getBoundingClientRect();
+                activeRef.current.style.transform = `translate(${linkPosition.left - 10}px, ${linkPosition.top}px)`;
+                console.log(activeRef.current?.style.transform);
+            }
+        }
+    };
+
+    const handleMouseLeave = (e: React.MouseEvent<HTMLAnchorElement>) => {
+        const target = e.currentTarget;
+        console.log(pathname, target.href, pathname === target.href);
+        if (pathname === `/${target.href.split('/').pop()}`) {
+            if (activeRef.current) {
+                const width = target.getBoundingClientRect().width;
+
+                const linkPosition = target.getBoundingClientRect();
+                activeRef.current.style.width = `${width}px`;
+                activeRef.current.style.transform = `translate(${linkPosition.left}px, ${linkPosition.top}px)`;
+                console.log(activeRef.current?.style.transform);
+            }
+        }
+    };
+
     return (
-        <header className="fixed flex items-center justify-between w-full px-4 py-3 bg-white shadow-md dark:bg-gray-800">
+        <header className="sticky top-0 flex flex-col md:flex-row items-center justify-between w-full px-4 py-3 bg-white shadow-md dark:bg-gray-800">
             <div className="flex items-center">
-                <div className='text-2xl'><FaGraduationCap /></div>
-                <h1 className="ml-2 text-lg font-bold text-gray-900 dark:text-white">
+                <div className='text-lg lg:text-2xl'><FaGraduationCap /></div>
+                <h1 className="ml-2 text-md md:text-lg font-bold text-gray-900 dark:text-white">
                     Student Hub
                 </h1>
-            </div>
-            <nav className="flex items-center justify-center relative">
-                {links.map((link) => (
-                    <Link
-                        key={link.href}
-                        href={link.href}
-                        className={`flex items-center ${pathname === link.href ? 'text-gray-900 dark:text-white' : 'text-gray-600 dark:text-gray-400'} px-4 hover:text-gray-900 dark:hover:text-white transition-colors duration-200`}
-                    >
-                        <span className="mr-2">{link.icon}</span>
-                        {link.text}
-                    </Link>
-                ))}
+                <div className='ml-2 sm:hidden'>
                 <ThemeSwitcher />
-                <div
-                    className={`fixed left-0 h-[2px] bg-blue-500 dark:bg-indigo-500 ${activeLinkStyle}`}
-                    ref={activeRef}
-                    style={{ transition: 'transform 0.3s ease-in-out, width 0.3s ease-in-out' }}
-                />
+                </div>
+            </div>
+            <nav className='flex items-center justify-center relative'>
+                <div className='flex flex-row'>
+                    {links.map((link) => (
+                        <Link
+                            key={link.href}
+                            href={link.href}
+                            className={`flex items-center ${pathname === link.href ? 'text-gray-700 dark:text-gray-300' : 'text-gray-600 dark:text-gray-400'} px-1 sm:px-4 hover:text-black dark:hover:text-white transition-colors duration-200`}
+                            onMouseEnter={handleMouseEnter}
+                            onMouseLeave={handleMouseLeave}
+                        >
+                            <span className="mr-2">{link.icon}</span>
+                            {link.text}
+                        </Link>
+                    ))}
+                    <div className='md:ml-2 hidden sm:flex'>
+                        <ThemeSwitcher />
+                    </div>
+                </div>
             </nav>
+            <div
+                className={`fixed opacity-0 lg:opacity-100 left-0 h-[2px] bg-blue-500 dark:bg-indigo-500 ${activeLinkStyle}`}
+                ref={activeRef}
+                style={{ transition: 'transform 0.3s ease-in-out, width 0.3s ease-in-out' }}
+            />
         </header>
     );
 }
