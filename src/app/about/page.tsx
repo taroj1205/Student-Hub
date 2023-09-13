@@ -2,7 +2,7 @@ import Image from 'next/image';
 
 export default function About() {
     return (
-        <main className='flex flex-col items-center justify-center min-h-screen bg-gray-100 dark:bg-gray-900 dark:text-white'>
+        <main className='flex flex-col items-center justify-center min-h-full bg-gray-100 dark:bg-gray-900'>
             <div className="max-w-5xl w-full px-4 sm:px-6 lg:px-8">
                 <div className="flex flex-col items-center justify-center py-12">
                     <h1 className="mt-6 text-3xl font-extrabold text-gray-900 dark:text-white">
@@ -18,7 +18,7 @@ export default function About() {
                         alt="Profile Picture"
                         width={200}
                         height={200}
-                        className="rounded-full"
+                        className="rounded-lg object-fit"
                     />
                 </div>
                 <div className="max-w-2xl mx-auto mt-8 text-center">
