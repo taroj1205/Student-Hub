@@ -124,7 +124,7 @@ export default function Header() {
                             {link.text}
                         </Link>
                     ))}
-                    <div className='hidden sm:flex'>
+                    <div className='md:ml-2 hidden sm:flex'>
                         <ThemeSwitcher />
                     </div>
                 </div>
