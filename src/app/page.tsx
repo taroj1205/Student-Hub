@@ -1,6 +1,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { FaGraduationCap, FaHourglassHalf } from 'react-icons/fa';
+import { TbMessageChatbot } from 'react-icons/tb';
 import { GiMagicPortal } from 'react-icons/gi';
 import { FaRankingStar } from 'react-icons/fa6';
 
@@ -9,7 +10,7 @@ export default function Home() {
   const apps = [
     {
       icon: <FaRankingStar />,
-      link: '/ncea',
+      link: 'https://taroj.poyo.jp/apps/ncea',
       name: 'NCEA Progress',
       description: 'Calculate your rank score and manage your credits.'
     },
@@ -20,10 +21,10 @@ export default function Home() {
       description: 'Westlake Boys High School Portal.'
     },
     {
-      icon: <FaHourglassHalf />,
+      icon: <TbMessageChatbot />,
       link: '/',
-      name: 'Coming soon',
-      description: 'Coming soon.'
+      name: 'Chat',
+      description: 'Chat with other people.'
     }
   ];
 

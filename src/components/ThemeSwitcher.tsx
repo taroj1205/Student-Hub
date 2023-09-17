@@ -8,9 +8,8 @@ export const ThemeSwitcher = () => {
     const { resolvedTheme, setTheme } = useTheme();
 
     useEffect(() => {
-        console.log(resolvedTheme);
         setMounted(true);
-    }, [resolvedTheme]);
+    }, []);
 
     return (
         <button
