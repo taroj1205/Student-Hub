@@ -1,16 +1,21 @@
 'use client'
 import Link from 'next/link';
 import { useState } from 'react';
-import { FaFacebook, FaLinkedin, FaTwitter, FaDiscord, FaInstagram } from 'react-icons/fa';
+import { FaFacebook, FaLinkedin, FaTwitter, FaInstagram } from 'react-icons/fa';
 
 export default function Contact() {
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [message, setMessage] = useState('');
+    const [subject, setSubject] = useState(''); // New state for subject
 
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         // TODO: Implement form submission logic
+        // Construct the mailto link with the subject
+        const mailtoLink = `mailto:taroj1205@gmail.com?subject=${encodeURIComponent(`${subject} - ${name}`)}&body=${encodeURIComponent(message)}`;
+        // Open the email client
+        window.location.href = mailtoLink;
     };
 
     return (
@@ -46,6 +51,18 @@ export default function Contact() {
                             type="email"
                             value={email}
                             onChange={(e) => setEmail(e.target.value)}
+                            className="mt-2 px-4 py-2 w-full text-gray-900 dark:text-white bg-white dark:bg-gray-800 rounded-lg shadow-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                            required />
+                    </div>
+                    <div className="flex flex-col items-start w-full">
+                        <label htmlFor="subject" className="text-lg font-medium text-gray-900 dark:text-white">
+                            Subject
+                        </label>
+                        <input
+                            id="subject"
+                            type="text"
+                            value={subject}
+                            onChange={(e) => setSubject(e.target.value)} // Update subject state
                             className="mt-2 px-4 py-2 w-full text-gray-900 dark:text-white bg-white dark:bg-gray-800 rounded-lg shadow-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                             required />
                     </div>
