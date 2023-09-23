@@ -132,7 +132,7 @@ export default function Header() {
                 </div>
             </nav>
             <div
-                className={`fixed opacity-0 lg:opacity-100 left-0 h-[2px] bg-blue-500 dark:bg-indigo-500 ${activeLinkStyle}`}
+                className={`fixed opacity-100 mt-3 sm:mt-4 md:mt-0 left-0 h-[2px] bg-blue-500 dark:bg-indigo-500 ${activeLinkStyle}`}
                 ref={activeRef}
                 style={{ transition: 'transform 0.3s ease-in-out, width 0.3s ease-in-out' }}
             />
